@@ -2,11 +2,12 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import json
 import os
-import subprocess
+from footer import add_footer
 
 st.title("Welcome to the :blue[Home Page]")
 
 post_db = "posts.json"
+
 def load_posts():
     if os.path.exists(post_db):
         with open(post_db, "r") as file:
@@ -41,23 +42,35 @@ class MultiApp:
 
         if app == 'Home':
             show_homepage()
+        elif app == 'Your Posts':
+            st.switch_page("pages/your_posts.py")
         elif app == 'Create Post':
-              subprocess.Popen(["streamlit", "run", "create_post.py"], start_new_session=True)
+            st.switch_page("pages/create_post.py")
         elif app == 'Signout':
-              subprocess.Popen(["streamlit", "run", "login_signup.py"], start_new_session=True) 
-
+            signout()
 
 def show_homepage():
     st.title("📢 Latest Posts")
     posts = load_posts()
 
     if posts:
-        for post in reversed(posts):  # Show latest posts first
+        for post in reversed(posts): 
             st.subheader(post["Title"])
+            st.subheader(post['Name'])
             st.write(post["Content"])
             st.markdown("---")
     else:
         st.info("No posts available. Create a new post to get started! 🎉")
 
+def signout():
+
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    
+    st.switch_page("login_signup.py")
+
 app = MultiApp()
 app.run()
+
+
+add_footer()
