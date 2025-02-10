@@ -34,7 +34,6 @@ BLOGSTOP/
 ├── README.md               
 ├── users.json              
 
-
 ## 🛠 Installation & Setup
 ### 1️⃣ Clone the Repository
 ```bash
@@ -73,14 +72,6 @@ streamlit run login_signup.py
 - **AI Writing Assistance**: Click `Write with AI` to generate AI-powered content.
 - **View Posts**: Browse through published blog posts on the homepage.
 - **Logout**: Securely sign out using the `Signout` option.
-
----
-
-## 📝 To-Do List
-- [ ] Add database integration (SQLite/PostgreSQL) for persistent storage.
-- [ ] Implement user authentication with hashed passwords.
-- [ ] Improve UI with custom CSS and styling.
-- [ ] Deploy the app on a cloud platform (e.g., Heroku, Render).
 
 ---
 
