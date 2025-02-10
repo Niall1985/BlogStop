@@ -15,17 +15,25 @@ BlogStop is a minimal and user-friendly blogging platform built with **Streamlit
 
 ## 📂 Project Structure
 ```
-BlogStop/
-│── posts.json             # Stores blog posts
-│── .gitignore             # Ignores unnecessary files (e.g., posts.json)
-│── login_signup.py        # Handles user authentication
-│── home.py                # Displays the home page with recent posts
-│── create_post.py         # Allows users to write and publish posts
-│── requirements.txt       # Lists required dependencies
-│── README.md              # Documentation for the project
-```
+BLOGSTOP/
+│
+├── __pycache__/            
+├── .streamlit/             
+├── pages/                  
+│   ├── create_post.py      
+│   ├── home.py             
+│   ├── password_reset.py   
+│   ├── temp.py             
+│   ├── your_posts.py       
+│
+├── .env                    
+├── app.py                  
+├── footer.py               
+├── LICENSE                 
+├── posts.json              
+├── README.md               
+├── users.json              
 
----
 
 ## 🛠 Installation & Setup
 ### 1️⃣ Clone the Repository
