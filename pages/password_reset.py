@@ -39,11 +39,8 @@ if st.button(":green[Update Password]"):
         success = update_password(username, new_password)
         if success:
             st.success("Password updated successfully!")
+            st.switch_page("pages/temp.py")
         else:
             st.error("User not found. Please check your username.")
     else:
         st.error("Passwords do not match. Please try again.")
-if success:
-    if st.button(":blue[Proceed to login]"):
-        st.switch_page("login_signup.py")
-            
