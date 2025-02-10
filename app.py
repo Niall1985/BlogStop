@@ -102,4 +102,9 @@ else:
             else:
                 st.error("Incorrect Username/Password entered")
 
+
+params = st.experimental_get_query_params()
+if "page" in params and params["page"][0] == "app":
+    st.write("Welcome back!")
+
 add_footer()

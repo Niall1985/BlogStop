@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import os
+from footer import add_footer
 
 database_file = "users.json"
 
@@ -42,8 +43,9 @@ if st.button(":green[Update Password]"):
             st.error("User not found. Please check your username.")
     else:
         st.error("Passwords do not match. Please try again.")
-
 if success:
     if st.button(":blue[Proceed to login]"):
-        st.switch_page("login_signup.py")
+        st.experimental_set_query_params(page="home")
+        st.rerun()
             
+add_footer()
