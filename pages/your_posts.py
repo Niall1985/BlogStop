@@ -4,7 +4,16 @@ import os
 from footer import add_footer
 
 post_db = "posts.json"
-
+st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                display: none;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 def load_posts():
     if os.path.exists(post_db):
         with open(post_db, "r") as file:
@@ -33,7 +42,10 @@ if "logged_in" not in st.session_state or not st.session_state.logged_in:
     st.error("⚠️ Please log in first.")
     st.stop()
 
-st.title("📝 Your Posts")
+st.title("📝 Your Posts") 
+with st.sidebar:
+    if st.button("🏠 Back to Home"):
+        st.switch_page("pages/home.py")
 
 username = st.session_state.username  
 posts = load_posts()
@@ -56,7 +68,7 @@ else:
                     st.success("✅ Post updated successfully!")
                     st.rerun()
 
-            if st.button(f"🗑️ Delete Post {index}"):
+            if st.button(f"🗑️ Delete Post"):
                 delete_post(index)
                 st.warning("❌ Post deleted!")
                 st.rerun()

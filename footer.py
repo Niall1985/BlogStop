@@ -16,7 +16,7 @@ def add_footer():
         }
     </style>
     <div class="footer">
-        © 2024 BlogStop. All rights reserved.
+        © 2025 BlogStop. All rights reserved.
     </div>
     """
     st.markdown(footer, unsafe_allow_html=True)

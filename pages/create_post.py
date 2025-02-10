@@ -5,6 +5,16 @@ from dotenv import load_dotenv
 import json
 from footer import add_footer
 
+st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                display: none;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 load_dotenv()
 key = os.getenv('key')
 genai.configure(api_key=key)
@@ -28,7 +38,9 @@ def save_posts(post_title, post_username, post_content):
         json.dump(posts, file, indent=3)
 
 st.title("Create your :blue[Post]!")
-
+with st.sidebar:
+    if st.button("🏠 Back to Home"):
+        st.switch_page("pages/home.py")
 if "ai_content" not in st.session_state:
     st.session_state.ai_content = ""
 

@@ -4,7 +4,16 @@ import os
 from footer import add_footer
 
 database_file = "users.json"
-
+st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                display: none;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 def load_users():
     if os.path.exists(database_file):
         with open(database_file, "r") as file:
@@ -44,3 +53,5 @@ if st.button(":green[Update Password]"):
             st.error("User not found. Please check your username.")
     else:
         st.error("Passwords do not match. Please try again.")
+
+add_footer()

@@ -6,13 +6,17 @@ from footer import add_footer
 
 def main():
     st.set_page_config(page_title="SignUp/Login", layout="wide")
-    st.markdown("""
+    # st.sidebar.empty()
+    st.markdown(
+        """
         <style>
-            section[data-testid="stSidebar"] {
+            [data-testid="stSidebarNav"] {
                 display: none;
             }
         </style>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 
     database_file = "users.json"

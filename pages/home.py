@@ -4,6 +4,17 @@ import json
 import os
 from footer import add_footer
 
+st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                display: none;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
 st.title("Welcome to the :blue[Home Page]")
 
 post_db = "posts.json"
@@ -42,8 +53,6 @@ class MultiApp:
 
         if app == 'Home':
             show_homepage()
-        elif app == 'Your Posts':
-            st.switch_page("pages/your_posts.py")
         elif app == 'Create Post':
             st.switch_page("pages/create_post.py")
         elif app == 'Your Posts':
