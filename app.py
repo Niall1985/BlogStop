@@ -5,6 +5,15 @@ import bcrypt
 from footer import add_footer
 
 st.set_page_config(page_title="SignUp/Login", layout="wide")
+st.markdown("""
+    <style>
+        section[data-testid="stSidebar"] {
+            display: none;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
 database_file = "users.json"
 
 def callhome():
@@ -79,10 +88,8 @@ else:
     else:  
         username = st.text_input('Enter your username')
         password = st.text_input('Enter your password', type="password")
-        # st.button(":blue[Forgot Password]")
-            # st.write('Redirecting to login, create a new password')
-            # st.session_state["page"] = "login_signup"
-            # st.rerun()
+        if st.button(":blue[Forgot Password]"):
+            st.switch_page("pages/password_reset.py")
         
         if st.button(":green[Login]"):
             # h_p = hash_password(password)

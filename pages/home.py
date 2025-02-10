@@ -46,6 +46,8 @@ class MultiApp:
             st.switch_page("pages/your_posts.py")
         elif app == 'Create Post':
             st.switch_page("pages/create_post.py")
+        elif app == 'Your Posts':
+            st.switch_page("pages/your_posts.py")
         elif app == 'Signout':
             signout()
 
@@ -67,7 +69,7 @@ def signout():
     for key in list(st.session_state.keys()):
         del st.session_state[key]
     
-    st.switch_page("login_signup.py")
+    st.switch_page("app.py")
 
 app = MultiApp()
 app.run()
