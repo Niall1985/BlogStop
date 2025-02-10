@@ -45,5 +45,5 @@ if st.button(":green[Update Password]"):
 
 if success:
     if st.button(":blue[Proceed to login]"):
-        st.switch_page("login_signup.py")
+        st.page_link("app.py")
             
