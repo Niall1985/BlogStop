@@ -45,7 +45,5 @@ if st.button(":green[Update Password]"):
         st.error("Passwords do not match. Please try again.")
 if success:
     if st.button(":blue[Proceed to login]"):
-        st.experimental_set_query_params(page="home")
-        st.rerun()
+        st.switch_page("login_signup.py")
             
-add_footer()
