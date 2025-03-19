@@ -71,7 +71,7 @@ if st.button('Write with AI'):
 
         prompt = f"Write a blog post titled '{post_title}'. Keep it engaging and informative."
 
-        model = genai.GenerativeModel("gemini-pro")
+        model = genai.GenerativeModel("gemini-2.0-flash")
         response = model.generate_content(prompt)
 
         if response and response.text:
