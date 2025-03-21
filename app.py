@@ -8,15 +8,15 @@ def main():
     st.set_page_config(page_title="SignUp/Login", layout="wide")
     # st.sidebar.empty()
     st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {
-                display: none;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    """
+    <style>
+        [data-testid="stSidebarNav"], section[data-testid="stSidebar"] {
+            display: none;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
     database_file = "users.json"

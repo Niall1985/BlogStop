@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 import json
 import os
 from footer import add_footer
@@ -6,15 +7,50 @@ from footer import add_footer
 st.markdown(
     """
     <style>
-        [data-testid="stSidebarNav"] {
+        [data-testid="stSidebarNav"], section[data-testid="stSidebar"] {
             display: none;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
+st.title("Welcome to :blue[Blog]Stop!")
+# menu = option_menu(
+#     menu_title = "Pages",
+#     options = ["🏡 Home Page", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
+#     default_index=0,
+#     orientation="horizontal",
+# )
 
-st.title("Welcome to the :blue[Home Page]")
+menu= option_menu(
+    menu_title="Pages",
+    options=["🏡 Home Page", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
+    default_index=0,
+    orientation="horizontal",
+    styles={
+        "container": {"background-color": "rgba(0,0,0,0)", "padding": "5px"},
+        "icon": {"color": "white", "font-size": "18px"},
+        "nav-link": {
+            "color": "white",
+            "font-size": "16px",
+            "text-align": "center",
+            "margin": "0px",
+            "--hover-color": "#444444",
+        },
+        "nav-link-selected": {"background-color": "#007BFF", "color": "white"},
+    }
+)
+
+if menu == "🏡 Home Page":
+    st.session_state["page"] = "home"
+elif menu == "➕ Create Post":
+    st.switch_page("pages/create_post.py")
+elif menu == "📧 Your Posts":
+    st.switch_page("pages/your_posts.py")
+elif menu == "🔓 Sign Out":
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.switch_page("app.py")
 
 post_db = "posts.json"
 
@@ -27,24 +63,13 @@ def load_posts():
                 return []
     return []
 
-with st.sidebar:
-    if st.button("🏡 Home Page"):
-        st.session_state["page"] = "home"
-    if st.button("➕ Create Post"):
-        st.switch_page("pages/create_post.py")
-    if st.button("📧 Your Posts"):
-        st.switch_page("pages/your_posts.py")
-    if st.button("🔓 Sign Out"):
-        for key in list(st.session_state.keys()):
-            del st.session_state[key]
-        st.switch_page("app.py")
-
-def show_homepage():
+# Show Homepage Content
+if st.session_state.get("page") == "home":
     st.title("📢 Latest Posts")
     posts = load_posts()
 
     if posts:
-        for post in reversed(posts): 
+        for post in reversed(posts):
             with st.container():
                 st.subheader(post["Title"])
                 st.write(f"✍️ {post['Name']}")
@@ -53,6 +78,5 @@ def show_homepage():
     else:
         st.info("No posts available. Create a new post to get started! 🎉")
 
-show_homepage()
-
+# Add Footer
 add_footer()
