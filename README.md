@@ -75,6 +75,11 @@ streamlit run login_signup.py
 
 ---
 
+![ScreenShot](images/image.png)
+
+---
+
+
 ## 🤝 Contributing
 Contributions are welcome! Feel free to fork this repository, make enhancements, and submit a pull request.
 

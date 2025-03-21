@@ -14,15 +14,10 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.title("Welcome to :blue[Blog]Stop!")
-# menu = option_menu(
-#     menu_title = "Pages",
-#     options = ["🏡 Home Page", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
-#     default_index=0,
-#     orientation="horizontal",
-# )
 
-menu= option_menu(
+st.title("Welcome to :blue[Blog]Stop!")
+
+menu = option_menu(
     menu_title="Pages",
     options=["🏡 Home", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
     default_index=0,
@@ -41,7 +36,10 @@ menu= option_menu(
     }
 )
 
-if menu == "🏡 Home Page":
+if "page" not in st.session_state:
+    st.session_state["page"] = "home"
+
+if menu == "🏡 Home":
     st.session_state["page"] = "home"
 elif menu == "➕ Create Post":
     st.switch_page("pages/create_post.py")
@@ -55,28 +53,35 @@ elif menu == "🔓 Sign Out":
 post_db = "posts.json"
 
 def load_posts():
-    if os.path.exists(post_db):
-        with open(post_db, "r") as file:
-            try:
-                return json.load(file)
-            except json.JSONDecodeError:
-                return []
-    return []
+    if not os.path.exists(post_db):
+        with open(post_db, "w", encoding="utf-8") as file:
+            json.dump([], file) 
+    with open(post_db, "r", encoding="utf-8") as file:
+        try:
+            data = json.load(file)
+            return data if isinstance(data, list) else []
+        except json.JSONDecodeError:
+            return []
 
-# Show Homepage Content
-if st.session_state.get("page") == "home":
+posts = load_posts()  
+
+# st.write("Session Page:", st.session_state["page"])
+# st.write("Loaded Posts:", posts)
+
+def show_homepage():
     st.title("📢 Latest Posts")
-    posts = load_posts()
 
-    if posts:
-        for post in reversed(posts):
+    if posts: 
+        for post in reversed(posts): 
             with st.container():
-                st.subheader(post["Title"])
-                st.write(f"✍️ {post['Name']}")
-                st.write(post["Content"])
+                st.subheader(post.get("Title", "Untitled Post"))
+                st.write(f"✍️ {post.get('Name', 'Unknown Author')}")
+                st.write(post.get("Content", "No content available."))
                 st.markdown("---")
     else:
         st.info("No posts available. Create a new post to get started! 🎉")
 
-# Add Footer
+if st.session_state["page"] == "home":
+    show_homepage()
+
 add_footer()
