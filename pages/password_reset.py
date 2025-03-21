@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 from footer import add_footer
+from encryption import encryption_func
 
 database_file = "users.json"
 st.markdown(
@@ -45,7 +46,7 @@ success = False
 
 if st.button(":green[Update Password]"):
     if new_password == confirm_new_password:
-        success = update_password(username, new_password)
+        success = update_password(username, encryption_func(new_password))
         if success:
             st.success("Password updated successfully!")
             st.switch_page("pages/temp.py")

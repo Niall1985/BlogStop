@@ -24,20 +24,20 @@ st.title("Welcome to :blue[Blog]Stop!")
 
 menu= option_menu(
     menu_title="Pages",
-    options=["🏡 Home Page", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
+    options=["🏡 Home", "➕ Create Post", "📧 Your Posts", "🔓 Sign Out"],
     default_index=0,
     orientation="horizontal",
     styles={
         "container": {"background-color": "rgba(0,0,0,0)", "padding": "5px"},
         "icon": {"color": "white", "font-size": "18px"},
         "nav-link": {
-            "color": "white",
+            "color": "blue",
             "font-size": "16px",
             "text-align": "center",
             "margin": "0px",
-            "--hover-color": "#444444",
+            "--hover-color": "#d2d9d7",
         },
-        "nav-link-selected": {"background-color": "#007BFF", "color": "white"},
+        "nav-link-selected": {"background-color": "#9E1A1A", "color": "white"},
     }
 )
 

@@ -3,6 +3,7 @@ import json
 import os
 import bcrypt
 from footer import add_footer
+from encryption import encryption_func
 
 def main():
     st.set_page_config(page_title="SignUp/Login", layout="wide")
@@ -79,7 +80,7 @@ def main():
 
             if confirm_password == password:
                 if st.button(":green[Signup]"):
-                    save_user_data(email, username, password)
+                    save_user_data(email, username, encryption_func(password))
                     st.success("Signup successful! Please log in.")
             else:
                 st.error("Passwords do not match. Please try again.")
@@ -91,7 +92,7 @@ def main():
                 st.switch_page("pages/password_reset.py")
             
             if st.button(":green[Login]"):
-                if verify_user_login(username, password):
+                if verify_user_login(username, encryption_func(password)):
                     st.success(f"Logged in successfully! Welcome, {username} 🎉")
                     st.session_state.logged_in = True
                     st.session_state.username = username 
