@@ -77,13 +77,15 @@ def main():
             username = st.text_input('Enter your username')
             password = st.text_input('Enter your password', type="password")
             confirm_password = st.text_input('Confirm your password', type="password")
-
-            if confirm_password == password:
-                if st.button(":green[Signup]"):
-                    save_user_data(email, username, encryption_func(password))
-                    st.success("Signup successful! Please log in.")
-            else:
-                st.error("Passwords do not match. Please try again.")
+            if st.button(":green[Signup]"):
+                if email == "" and username == "" and password == "" and confirm_password == "":
+                    st.error("No information entered!")
+                else:
+                    if confirm_password == password:
+                        save_user_data(email, username, encryption_func(password))
+                        st.success("Signup successful! Please log in.")
+            # else:
+            #     st.error("Passwords do not match. Please try again.")
 
         else:  
             username = st.text_input('Enter your username')
@@ -92,7 +94,9 @@ def main():
                 st.switch_page("pages/password_reset.py")
             
             if st.button(":green[Login]"):
-                if verify_user_login(username, encryption_func(password)):
+                if username == "" and password == "":
+                    st.error("No information entered")
+                elif verify_user_login(username, encryption_func(password)):
                     st.success(f"Logged in successfully! Welcome, {username} 🎉")
                     st.session_state.logged_in = True
                     st.session_state.username = username 
